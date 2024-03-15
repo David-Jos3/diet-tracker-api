@@ -1,7 +1,7 @@
 import { IsDateString, IsNotEmpty, IsOptional } from 'class-validator';
 export class CreateMealDto {
   @IsNotEmpty()
-  id: string;
+  userId: string;
 
   @IsNotEmpty()
   name: string;
@@ -10,19 +10,19 @@ export class CreateMealDto {
   description: string;
 
   @IsDateString()
-  createAt: Date;
+  createAt?: Date;
 
   @IsDateString()
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @IsNotEmpty()
   withinTheDiet: boolean;
-
-  @IsNotEmpty()
-  userId: string;
 }
 
 export class UpdateMealDto {
+  @IsOptional()
+  userId?: string;
+
   @IsOptional()
   name?: string;
 
@@ -35,11 +35,8 @@ export class UpdateMealDto {
 
   @IsOptional()
   @IsDateString()
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @IsOptional()
-  withinTheDiet?: boolean;
-
-  @IsOptional()
-  userId?: string;
+  withinTheDiet: boolean;
 }

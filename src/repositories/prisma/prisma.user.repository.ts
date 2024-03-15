@@ -1,7 +1,7 @@
 import { UserRepository } from '../user.repository';
 import { PrismaService } from 'src/database/prisma.client';
 import { Injectable } from '@nestjs/common';
-import { createUserDto } from 'src/dtos/user.dto';
+import { CreateUserDto } from 'src/dtos/user.dto';
 
 @Injectable()
 export class PrismaUserRepositorys implements UserRepository {
@@ -15,9 +15,11 @@ export class PrismaUserRepositorys implements UserRepository {
       data: { username, email, password },
     });
   }
-  async findAll(): Promise<createUserDto[]> {
+  async findByIdRepository(id: string): Promise<CreateUserDto[]> {
     try {
-      return await this.prisma.user.findMany();
+      return await this.prisma.user.findMany({
+        where: { id },
+      });
     } catch (erro) {
       throw new Error(erro);
     }

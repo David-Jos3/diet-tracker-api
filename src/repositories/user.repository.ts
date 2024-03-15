@@ -1,4 +1,4 @@
-import { createUserDto } from 'src/dtos/user.dto';
+import { CreateUserDto } from 'src/dtos/user.dto';
 
 export abstract class UserRepository {
   abstract create(
@@ -7,5 +7,5 @@ export abstract class UserRepository {
     password: string,
   ): Promise<void>;
 
-  abstract findAll(): Promise<createUserDto[]>;
+  abstract findByIdRepository(id: string): Promise<CreateUserDto[]>;
 }
