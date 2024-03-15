@@ -9,6 +9,6 @@ export class UserService {
   }
 
   async findAll() {
-    return { message: '' };
+    return await this.userRepository;
   }
 }

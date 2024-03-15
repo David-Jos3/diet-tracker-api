@@ -5,11 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { CreateMealDto } from './meal.dto';
 export class createUserDto {
-  @IsNotEmpty()
-  id: string;
-
   @IsNotEmpty()
   username: string;
 
@@ -25,6 +21,4 @@ export class createUserDto {
       'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e um número',
   })
   password: string;
-
-  Meal: CreateMealDto[];
 }

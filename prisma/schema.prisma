@@ -18,7 +18,7 @@ model User {
   username String
   email    String @unique
   password String
-  Meal     Meal[]
+  meal     Meal[]
 
   @@map("user")
 }
