@@ -8,9 +8,9 @@ export class MealService {
     userId: string,
     name: string,
     description: string,
-    withinTheDiet: boolean,
+    isInDiet: boolean,
   ) {
-    await this.mealRepository.create(userId, name, description, withinTheDiet);
+    await this.mealRepository.create(userId, name, description, isInDiet);
   }
 
   async findUserIdService(userId: string) {

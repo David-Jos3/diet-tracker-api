@@ -5,7 +5,7 @@ export abstract class MealRepository {
     userId: string,
     name: string,
     description: string,
-    withinTheDiet: boolean,
+    isInDiet: boolean,
   ): Promise<void>;
 
   abstract findUserIdRepository(userId: string): Promise<CreateMealDto>;

@@ -12,11 +12,8 @@ export class CreateMealDto {
   @IsDateString()
   createAt?: Date;
 
-  @IsDateString()
-  updatedAt?: Date;
-
   @IsNotEmpty()
-  withinTheDiet: boolean;
+  isInDiet: boolean;
 }
 
 export class UpdateMealDto {
@@ -31,12 +28,8 @@ export class UpdateMealDto {
 
   @IsOptional()
   @IsDateString()
-  createdAt?: Date;
-
-  @IsOptional()
-  @IsDateString()
   updatedAt?: Date;
 
   @IsOptional()
-  withinTheDiet: boolean;
+  isInDiet: boolean;
 }
