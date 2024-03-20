@@ -1,6 +1,15 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { MealService } from './meal.service';
-import { CreateMealDto } from 'src/dtos/meal.dto';
+import { CreateMealDto, UpdateMealDto } from 'src/dtos/meal.dto';
+
 @Controller('meal')
 export class MealController {
   constructor(private readonly mealService: MealService) {}
@@ -12,8 +21,20 @@ export class MealController {
   }
 
   @Get(':userId')
-  async findUserId(@Param('userId') userId: string): Promise<CreateMealDto> {
-    console.log(userId);
-    return this.mealService.findUserIdService(userId);
+  async findUserId(@Param('userId') userId: string): Promise<CreateMealDto[]> {
+    return await this.mealService.findUserIdService(userId);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateMealDto: UpdateMealDto,
+  ): Promise<void> {
+    await this.mealService.updateService(id, updateMealDto);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<void> {
+    await this.mealService.deleteService(id);
   }
 }

@@ -17,7 +17,7 @@ import { Response } from 'express';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  @Post('sign-up')
+  @Post('register')
   async create(@Body() body: CreateUserDto): Promise<void> {
     const { username, email, password } = body;
     await this.userService.createUserServices(username, email, password);

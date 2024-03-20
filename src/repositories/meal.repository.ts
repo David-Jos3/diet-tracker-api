@@ -1,4 +1,4 @@
-import { CreateMealDto } from 'src/dtos/meal.dto';
+import { CreateMealDto, UpdateMealDto } from 'src/dtos/meal.dto';
 
 export abstract class MealRepository {
   abstract create(
@@ -8,5 +8,11 @@ export abstract class MealRepository {
     isInDiet: boolean,
   ): Promise<void>;
 
-  abstract findUserIdRepository(userId: string): Promise<CreateMealDto>;
+  abstract findUserIdRepository(userId: string): Promise<CreateMealDto[]>;
+  abstract updateRepository(
+    id: string,
+    updateMealDto: UpdateMealDto,
+  ): Promise<void>;
+
+  abstract deleteRepository(id: string): Promise<void>;
 }
