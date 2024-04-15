@@ -18,6 +18,15 @@ export class UserService {
     return await this.userRepository.findByIdRepository(id);
   }
 
+  async getUserMetric(id: string) {
+    const user = await this.userRepository.findByIdRepository(id);
+
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+    const totalMeal = user[0].meal.length;
+    return { totalMeal };
+  }
   async findAllServices(): Promise<CreateUserDto[]> {
     return await this.userRepository.findAllRepository();
   }

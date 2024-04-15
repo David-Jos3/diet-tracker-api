@@ -33,6 +33,11 @@ export class UserController {
     return await this.userService.findAllServices();
   }
 
+  @Get('metrics/:id')
+  async getUserMetrics(@Param('id') id: string) {
+    return await this.userService.getUserMetric(id);
+  }
+
   @Put(':id')
   async update(
     @Param('id') id: string,

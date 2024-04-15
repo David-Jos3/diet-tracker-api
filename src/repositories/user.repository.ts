@@ -8,6 +8,7 @@ export abstract class UserRepository {
     password: string,
   ): Promise<void>;
   abstract findByIdRepository(id: string): Promise<CreateUserDto[]>;
+  abstract findByMetricsId(id: string): Promise<CreateUserDto[]>;
   abstract findAllRepository(): Promise<CreateUserDto[]>;
   abstract updateRepository(id: string, updateUserDto: UpdateUserDto);
   abstract deleteRepository(id: string): Promise<void>;

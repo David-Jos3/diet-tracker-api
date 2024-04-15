@@ -31,6 +31,16 @@ export class PrismaUserRepositorys implements UserRepository {
     }
   }
 
+  async findByMetricsId(id: string): Promise<CreateUserDto[]> {
+    try {
+      return await this.prisma.user.findMany({
+        where: { id },
+      });
+    } catch (erro) {
+      throw new Error(erro);
+    }
+  }
+
   async findAllRepository(): Promise<CreateUserDto[]> {
     try {
       return await this.prisma.user.findMany({ include: { meal: true } });
