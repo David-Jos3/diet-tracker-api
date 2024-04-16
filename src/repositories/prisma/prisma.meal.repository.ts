@@ -6,6 +6,7 @@ import { CreateMealDto, UpdateMealDto } from 'src/dtos/meal.dto';
 @Injectable()
 export class PrismaMealRepository implements MealRepository {
   constructor(private prisma: PrismaService) {}
+
   async create(
     userId: string,
     name: string,
@@ -20,6 +21,9 @@ export class PrismaMealRepository implements MealRepository {
     return await this.prisma.meal.findMany({
       where: { userId: userId },
     });
+  }
+  async findByIdMealRepository(id: string): Promise<CreateMealDto> {
+    return await this.prisma.meal.findUnique({ where: { id } });
   }
 
   async updateRepository(

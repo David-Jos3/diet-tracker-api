@@ -20,9 +20,14 @@ export class MealController {
     await this.mealService.createService(userId, name, description, isInDiet);
   }
 
-  @Get(':userId')
+  @Get('user/:userId')
   async findUserId(@Param('userId') userId: string): Promise<CreateMealDto[]> {
     return await this.mealService.findUserIdService(userId);
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: string): Promise<CreateMealDto> {
+    return await this.mealService.findByIdMeal(id);
   }
 
   @Put(':id')

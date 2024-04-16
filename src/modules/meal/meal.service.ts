@@ -18,6 +18,10 @@ export class MealService {
     return await this.mealRepository.findUserIdRepository(userId);
   }
 
+  async findByIdMeal(id: string) {
+    return await this.mealRepository.findByIdMealRepository(id);
+  }
+
   async updateService(id: string, updateMealDto: UpdateMealDto): Promise<void> {
     await this.mealRepository.updateRepository(id, updateMealDto);
   }

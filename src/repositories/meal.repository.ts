@@ -9,6 +9,7 @@ export abstract class MealRepository {
   ): Promise<void>;
 
   abstract findUserIdRepository(userId: string): Promise<CreateMealDto[]>;
+  abstract findByIdMealRepository(id: string): Promise<CreateMealDto>;
   abstract updateRepository(
     id: string,
     updateMealDto: UpdateMealDto,
