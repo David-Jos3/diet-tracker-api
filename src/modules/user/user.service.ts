@@ -1,6 +1,8 @@
+import { AuthPayloadDto } from 'src/dtos/auth.dto';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto } from 'src/dtos/user.dto';
 import { UserRepository } from 'src/repositories/user.repository';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -11,7 +13,18 @@ export class UserService {
     email: string,
     password: string,
   ): Promise<void> {
-    await this.userRepository.createUserRepository(username, email, password);
+    const passwordHash = await bcrypt.hash(password, 10);
+    await this.userRepository.createUserRepository(
+      username,
+      email,
+      passwordHash,
+    );
+  }
+
+  async findOne(login: AuthPayloadDto) {
+    const user = await this.userRepository.findByEmail(login);
+    console.log(user);
+    return user;
   }
 
   async findByIdServices(id: string): Promise<CreateUserDto[]> {
@@ -57,7 +70,12 @@ export class UserService {
     id: string,
     updateUserDto: UpdateUserDto,
   ): Promise<void> {
-    return await this.userRepository.updateRepository(id, updateUserDto);
+    const passwordHash = await bcrypt.hash(updateUserDto.password, 10);
+    return await this.userRepository.updateRepository(
+      id,
+      updateUserDto,
+      passwordHash,
+    );
   }
 
   async deleteServices(id: string): Promise<void> {

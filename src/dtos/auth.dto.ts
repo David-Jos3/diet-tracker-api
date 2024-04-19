@@ -1,4 +1,4 @@
-export class authPayloadDto {
+export class AuthPayloadDto {
   email: string;
   password: string;
 }
