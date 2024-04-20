@@ -2,7 +2,7 @@ import { AuthPayloadDto } from 'src/dtos/auth.dto';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto } from 'src/dtos/user.dto';
 import { UserRepository } from 'src/repositories/user.repository';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -48,6 +48,7 @@ export class UserService {
     }
 
     const totalMeal = user[0].meal;
+
     const dietMealsTotal = totalMeal.filter((meal) => meal.isInDiet).length;
     return { dietMealsTotal };
   }

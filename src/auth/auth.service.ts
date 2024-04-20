@@ -1,8 +1,9 @@
-import bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthPayloadDto } from 'src/dtos/auth.dto';
 import { UserService } from 'src/modules/user/user.service';
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -15,12 +16,9 @@ export class AuthService {
     if (!user) {
       throw new Error('User not found');
     }
-    console.log(authLogin.password, user.password);
     const isPassword = await bcrypt.compare(authLogin.password, user.password);
-    if (isPassword) {
-      console.log('A senha está correta');
-    } else {
-      console.log('Deu merda na tua senha ai bicho');
+    if (!isPassword) {
+      throw new Error('The password is incorrect');
     }
     return user;
   }
