@@ -20,7 +20,22 @@ export class MealController {
     await this.mealService.createService(userId, name, description, isInDiet);
   }
 
-  @Get('user/:userId')
+  @Get(':userId/total')
+  async getUserMetrics(@Param('userId') userId: string) {
+    return await this.mealService.getMealMetricsTotal(userId);
+  }
+
+  @Get(':userId/diet/total')
+  async getUserDietTotal(@Param('userId') userId: string) {
+    return await this.mealService.getMealMetricsDiet(userId);
+  }
+
+  @Get(':userId/non-diet/total')
+  async getUserNonDietTotal(@Param('userId') userId: string) {
+    return await this.mealService.getMealMetricsNonDiet(userId);
+  }
+
+  @Get(':userId')
   async findUserId(@Param('userId') userId: string): Promise<CreateMealDto[]> {
     return await this.mealService.findUserIdService(userId);
   }

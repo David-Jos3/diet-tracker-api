@@ -33,19 +33,9 @@ export class UserController {
     return await this.userService.findAllServices();
   }
 
-  @Get(':id/meal/total')
-  async getUserMetrics(@Param('id') id: string) {
+  @Get('metrics/:id')
+  async getMetricsUser(@Param('id') id: string) {
     return await this.userService.getUserMetric(id);
-  }
-
-  @Get(':id/meal/diet/total')
-  async getUserDietTotal(@Param('id') id: string) {
-    return await this.userService.getUserMetricDiet(id);
-  }
-
-  @Get(':id/meal/non-diet/total')
-  async getUserNonDietTotal(@Param('id') id: string) {
-    return await this.userService.getUserMetricNonDiet(id);
   }
 
   @Put(':id')

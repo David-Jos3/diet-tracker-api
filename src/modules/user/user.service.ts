@@ -23,7 +23,7 @@ export class UserService {
 
   async findOne(login: AuthPayloadDto) {
     const user = await this.userRepository.findByEmail(login);
-    console.log(user);
+
     return user;
   }
 
@@ -39,28 +39,6 @@ export class UserService {
     }
     const totalMeal = user[0].meal.length;
     return { totalMeal };
-  }
-
-  async getUserMetricDiet(id: string) {
-    const user = await this.userRepository.findByIdRepository(id);
-    if (!user) {
-      throw new Error('Usuário não encontrado');
-    }
-
-    const totalMeal = user[0].meal;
-
-    const dietMealsTotal = totalMeal.filter((meal) => meal.isInDiet).length;
-    return { dietMealsTotal };
-  }
-
-  async getUserMetricNonDiet(id: string) {
-    const user = await this.userRepository.findByIdRepository(id);
-    if (!user) {
-      throw new Error('Usuário não encontrado');
-    }
-    const totalMeal = user[0].meal;
-    const nonDietMealsTotal = totalMeal.filter((meal) => !meal.isInDiet).length;
-    return { nonDietMealsTotal };
   }
 
   async findAllServices(): Promise<CreateUserDto[]> {

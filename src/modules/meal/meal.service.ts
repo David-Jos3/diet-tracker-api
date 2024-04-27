@@ -18,6 +18,33 @@ export class MealService {
     return await this.mealRepository.findUserIdRepository(userId);
   }
 
+  async getMealMetricsTotal(userId: string) {
+    const meal = await this.mealRepository.findUserIdRepository(userId);
+    if (!meal) {
+      throw new Error('Erro ao busca total de Dieta');
+    }
+    const totalDiet = meal.length;
+    return { totalDiet };
+  }
+  async getMealMetricsDiet(userId: string) {
+    const meal = await this.mealRepository.findUserIdRepository(userId);
+    if (!meal) {
+      throw new Error('Erro ao buscar as Refeições dentro da dieta');
+    }
+    const totalInDiet = meal.filter((diet) => diet.isInDiet);
+
+    return { withinTheDiet: totalInDiet.length };
+  }
+  async getMealMetricsNonDiet(userId: string) {
+    const meal = await this.mealRepository.findUserIdRepository(userId);
+    if (!meal) {
+      throw new Error('Erro ao buscar as Refeições fora da dieta');
+    }
+    const totalInDiet = meal.filter((diet) => !diet.isInDiet);
+
+    return { withinTheDiet: totalInDiet.length };
+  }
+
   async findByIdMeal(id: string) {
     return await this.mealRepository.findByIdMealRepository(id);
   }
