@@ -23,6 +23,7 @@ export class PrismaMealRepository implements MealRepository {
     });
   }
   async findByIdMealRepository(id: string): Promise<CreateMealDto> {
+    console.log(id);
     return await this.prisma.meal.findUnique({ where: { id } });
   }
 

@@ -40,7 +40,7 @@ export class MealController {
     return await this.mealService.findUserIdService(userId);
   }
 
-  @Get(':id')
+  @Get('mealId/:id')
   async findById(@Param('id') id: string): Promise<CreateMealDto> {
     return await this.mealService.findByIdMeal(id);
   }
