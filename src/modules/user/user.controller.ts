@@ -13,10 +13,13 @@ import { UserService } from './user.service';
 import { CreateUserDto } from 'src/dtos/user.dto';
 import { UpdateUserDto } from 'src/dtos/user.dto';
 import { Response } from 'express';
+import { Public } from 'src/auth/constants/constants';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Public()
   @Post('register')
   async create(@Body() body: CreateUserDto): Promise<void> {
     const { username, email, password } = body;
@@ -60,7 +63,7 @@ export class UserController {
     } catch (error) {
       res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json({ messageError: 'Ocorreu um erro ao excluir o usuário.' });
+        .json({ messageError: 'Ocorreu um erro ao deletar o usuário.' });
       throw new Error(error.message);
     }
   }

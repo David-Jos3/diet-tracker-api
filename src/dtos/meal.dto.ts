@@ -12,6 +12,10 @@ export class CreateMealDto {
   @IsDateString()
   createAt?: Date;
 
+  @IsOptional()
+  @IsDateString()
+  updatedAt?: Date;
+
   @IsNotEmpty()
   isInDiet: boolean;
 }

@@ -45,6 +45,28 @@ export class MealService {
     return { withinTheDiet: totalInDiet.length };
   }
 
+  async getBestSequenceDiet(userId: string) {
+    const meals = await this.mealRepository.findUserIdRepository(userId);
+    const insideDiet = meals.filter((meal) => meal.isInDiet);
+    let totalTimeOnTheDiet = 0;
+    insideDiet.forEach((meal) => {
+      const createdAt = new Date(meal.createAt).getTime();
+      const updatedAt = new Date(meal.updatedAt).getTime();
+      const diffInMS = updatedAt - createdAt;
+      const diffInMinutes = diffInMS / (1000 * 60);
+      totalTimeOnTheDiet += diffInMinutes;
+    });
+
+    const days = Math.floor(totalTimeOnTheDiet / (60 * 24));
+    const remainingHours = Math.round((totalTimeOnTheDiet % (60 * 24)) / 60);
+
+    return {
+      BestSequenceDietInMinutes: totalTimeOnTheDiet.toFixed(2),
+      BestSequenceDietInDays: days,
+      BestSequenceDietInHours: remainingHours,
+    };
+  }
+
   async findByIdMeal(id: string) {
     return await this.mealRepository.findByIdMealRepository(id);
   }

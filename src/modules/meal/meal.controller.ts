@@ -35,6 +35,11 @@ export class MealController {
     return await this.mealService.getMealMetricsNonDiet(userId);
   }
 
+  @Get(':userId/diet/best-sequence')
+  async findUserIdDiet(@Param('userId') userId: string) {
+    return await this.mealService.getBestSequenceDiet(userId);
+  }
+
   @Get(':userId')
   async findUserId(@Param('userId') userId: string): Promise<CreateMealDto[]> {
     return await this.mealService.findUserIdService(userId);
